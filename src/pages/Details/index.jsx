@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import moment from "moment/moment";
+import { FaRegClock } from 'react-icons/fa'
+
 import { api } from "../../services/api";
 
 import { Container, Content } from "./styles";
@@ -17,8 +20,6 @@ import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 
 export function Details() {
   const [data, setData] = useState(null);
-
-  console.log(data)
 
   const { user } = useAuth();
 
@@ -60,7 +61,7 @@ export function Details() {
                 <Star rating={data.rating} />
               </strong>
             </div>
-              <span><img src={avatarURL} alt="imagem autor" /> Por {user.name} {data.created_at}</span>
+            <span><img src={avatarURL} alt="imagem autor" /> Por {user.name} <FaRegClock /> {moment(Date(data.created_at)).format("L LT")}</span>
             {
               data.tag &&
               <Section >
